@@ -286,3 +286,12 @@ func (store *Store) ConsumeFuel(fuel uint64) (uint64, error) {
 
 	return uint64(c_remaining), nil
 }
+
+func (store *Store) Limiter(
+	int64 memorySize,
+	int64 tableElements,
+	int64 instances,
+	int64 tables,
+	int64 memories) {
+	C.wasmtime_store_limiter(store, memorySize, tableElements, instances, tables, memories)
+}

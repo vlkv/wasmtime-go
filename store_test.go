@@ -81,3 +81,12 @@ func TestConsumeFuel(t *testing.T) {
 	require.NoError(t, err)
 	require.Equal(t, (add_fuel - consume_fuel), remaining)
 }
+
+func TestLimiter(t *testing.T) {
+	config := NewConfig()
+	engine := NewEngineWithConfig(config)
+	store := NewStore(engine)
+
+	store.Limiter(6*1024*1024, 10, 10, 10, 10)
+	// TODO... I guess we should try to overpass the limits and experience an error because of it
+}
